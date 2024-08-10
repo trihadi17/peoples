@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:peoples/pages/signup_page.dart';
 
 // Pages
 import 'package:peoples/pages/splash_page.dart';
 import 'package:peoples/pages/signin_page.dart';
+import 'package:peoples/pages/signup_page.dart';
 import 'package:peoples/pages/main_page.dart';
+import 'package:peoples/pages/detail_page.dart';
+import 'package:peoples/pages/add_page.dart';
+import 'package:peoples/pages/update_page.dart';
 
 void main() {
   runApp(const PeoplesApp());
@@ -22,6 +25,9 @@ class PeoplesApp extends StatelessWidget {
         '/signin': (context) => SignInPage(),
         '/signup': (context) => SignUpPage(),
         '/main': (context) => Mainpage(),
+        '/detail': (context) => DetailPage(),
+        '/add': (context) => AddPage(),
+        '/update': (context) => UpdatePage(),
       },
     );
   }
