@@ -45,7 +45,11 @@ class _SignInPageState extends State<SignInPage> {
     // Header
     Widget header() {
       return Container(
-        margin: EdgeInsets.symmetric(horizontal: 40),
+        margin: EdgeInsets.only(
+          top: 50,
+          left: 40,
+          right: 40,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -357,9 +361,6 @@ class _SignInPageState extends State<SignInPage> {
       backgroundColor: whiteColor,
       body: ListView(
         children: [
-          SizedBox(
-            height: 50,
-          ),
           header(),
           input(),
         ],
