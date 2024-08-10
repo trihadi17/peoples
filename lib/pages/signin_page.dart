@@ -70,7 +70,7 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             Text(
-              'Login Account',
+              'Sign In Account',
               style: greenTextStyle.copyWith(
                 fontSize: 24,
                 fontWeight: semiBold,
@@ -327,7 +327,7 @@ class _SignInPageState extends State<SignInPage> {
       );
     }
 
-    // Input (email, Password)
+    // FORM Input
     Widget input() {
       return Container(
         margin: EdgeInsets.symmetric(horizontal: 40),
@@ -351,6 +351,9 @@ class _SignInPageState extends State<SignInPage> {
                 height: 50,
               ),
               navToSignUp(),
+              SizedBox(
+                height: 15,
+              ),
             ],
           ),
         ),
