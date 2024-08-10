@@ -102,19 +102,24 @@ class _MainpageState extends State<Mainpage> {
                 fontSize: 20,
               ),
             ),
-            Container(
-              height: 30,
-              width: 70,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: greenColor,
-              ),
-              child: Text(
-                'Add People',
-                style: whiteTextStyle.copyWith(
-                  fontSize: 11,
-                  fontWeight: semiBold,
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/add');
+              },
+              child: Container(
+                height: 30,
+                width: 70,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: greenColor,
+                ),
+                child: Text(
+                  'Add People',
+                  style: whiteTextStyle.copyWith(
+                    fontSize: 11,
+                    fontWeight: semiBold,
+                  ),
                 ),
               ),
             )
