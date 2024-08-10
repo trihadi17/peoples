@@ -19,7 +19,7 @@ class PeopleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.pushNamed(context, '/detail');
+        Navigator.pushNamed(context, '/detail');
       },
       child: Container(
         width: (MediaQuery.of(context).size.width - 75) / 2,
