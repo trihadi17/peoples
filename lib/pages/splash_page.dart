@@ -26,41 +26,42 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: whiteColor,
-      body: Stack(children: [
-        Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [greenColor, greenColor, whiteColor, whiteColor],
+      backgroundColor: greenColor,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/icon.png',
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
             ),
-          ),
-        ),
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/icon.png',
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                "People's",
-                style: blackTextStyle.copyWith(
-                  fontSize: 36,
-                  fontWeight: bold,
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Peo",
+                  style: blackTextStyle.copyWith(
+                    fontSize: 36,
+                    fontWeight: bold,
+                  ),
                 ),
-              )
-            ],
-          ),
+                Text(
+                  "ple's",
+                  style: whiteTextStyle.copyWith(
+                    fontSize: 36,
+                    fontWeight: bold,
+                  ),
+                )
+              ],
+            ),
+          ],
         ),
-      ]),
+      ),
     );
   }
 }

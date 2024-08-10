@@ -26,7 +26,7 @@ class _SignInPageState extends State<SignInPage> {
 
   // validasi
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   // Varible FlutterToast
@@ -77,16 +77,16 @@ class _SignInPageState extends State<SignInPage> {
       );
     }
 
-    // USERNAME
-    Widget usernameInput() {
+    // Email
+    Widget emailInput() {
       return TextFormField(
-        controller: _usernameController,
+        controller: _emailController,
         validator: (value) {
-          return validateText(value, 'username');
+          return validateEmail(value);
         },
         // validasi ketika apa (contoh ketika diketik atau selalu)
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        keyboardType: TextInputType.text,
+        keyboardType: TextInputType.emailAddress,
         style: blackTextStyle.copyWith(
           fontSize: 14,
         ),
@@ -124,7 +124,7 @@ class _SignInPageState extends State<SignInPage> {
             fontSize: 12,
             color: Color(0xffFF314A),
           ),
-          hintText: 'Username',
+          hintText: 'Email',
           hintStyle: GoogleFonts.nunito(
             fontSize: 14,
             color: Color(0xffA9A9A9),
@@ -205,28 +205,6 @@ class _SignInPageState extends State<SignInPage> {
       );
     }
 
-    // Input (Username, Password)
-    Widget input() {
-      return Container(
-        margin: EdgeInsets.symmetric(horizontal: 40),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 50,
-              ),
-              usernameInput(),
-              SizedBox(
-                height: 20,
-              ),
-              passwordInput(),
-            ],
-          ),
-        ),
-      );
-    }
-
     // Error Toast
     Widget errorToast() {
       return Container(
@@ -240,7 +218,7 @@ class _SignInPageState extends State<SignInPage> {
         ),
         child: Center(
           child: Text(
-            'Incorrect Username or Password',
+            'Incorrect email or Password',
             style: whiteTextStyle.copyWith(
               fontSize: 16,
               fontWeight: semiBold,
@@ -252,109 +230,125 @@ class _SignInPageState extends State<SignInPage> {
 
     // Sign In Button
     Widget buttonSign() {
-      return Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: 40,
-        ),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 50,
-            ),
-            Container(
-              height: 50,
-              width: double.infinity,
-              child: TextButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    // aktifkan widget loading
-                    setState(() {
-                      isLoading = true;
-                    });
+      return Column(
+        children: [
+          Container(
+            height: 50,
+            width: double.infinity,
+            child: TextButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  // aktifkan widget loading
+                  setState(() {
+                    isLoading = true;
+                  });
 
-                    Future.delayed(
-                      Duration(seconds: 2),
-                      () {
-                        // nonaktifkan widget loading
-                        setState(() {
-                          isLoading = false;
-                        });
+                  Future.delayed(
+                    Duration(seconds: 2),
+                    () {
+                      // nonaktifkan widget loading
+                      setState(() {
+                        isLoading = false;
+                      });
 
-                        // kondisi akun
-                        if (_passwordController.text != '123456') {
-                          // toast
-                          fToast.showToast(
-                            child: errorToast(),
-                            gravity: ToastGravity.SNACKBAR,
-                            toastDuration: Duration(
-                              seconds: 2,
-                            ),
-                          );
-                        } else {
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, '/main', (route) => false);
-                        }
-                      },
-                    );
-                  } else {
-                    print('false');
-                  }
-                },
-                style: TextButton.styleFrom(
-                  backgroundColor: greenColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
+                      // kondisi akun
+                      if (_passwordController.text != '123456') {
+                        // toast
+                        fToast.showToast(
+                          child: errorToast(),
+                          gravity: ToastGravity.SNACKBAR,
+                          toastDuration: Duration(
+                            seconds: 2,
+                          ),
+                        );
+                      } else {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/main', (route) => false);
+                      }
+                    },
+                  );
+                } else {
+                  print('false');
+                }
+              },
+              style: TextButton.styleFrom(
+                backgroundColor: greenColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
                 ),
-                child: isLoading
-                    ? CircularProgressIndicator(
-                        color: whiteColor,
-                        backgroundColor: whiteGreyColor,
-                        strokeWidth: 3,
-                      )
-                    : Text(
-                        'Sign In',
-                        style: whiteTextStyle.copyWith(
-                          fontSize: 18,
-                          fontWeight: semiBold,
-                        ),
-                      ),
               ),
-            )
-          ],
-        ),
+              child: isLoading
+                  ? CircularProgressIndicator(
+                      color: whiteColor,
+                      backgroundColor: whiteGreyColor,
+                      strokeWidth: 3,
+                    )
+                  : Text(
+                      'Sign In',
+                      style: whiteTextStyle.copyWith(
+                        fontSize: 18,
+                        fontWeight: semiBold,
+                      ),
+                    ),
+            ),
+          )
+        ],
       );
     }
 
     // Navigation Sign Up Page
     Widget navToSignUp() {
-      return Container(
-        margin: EdgeInsets.only(
-          top: 40,
-          bottom: 20,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Don’t have account?',
-              style: greyTextStyle,
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/signup');
-              },
-              child: Text(
-                'Sign Up',
-                style: greenTextStyle.copyWith(
-                  fontWeight: bold,
-                ),
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Don’t have account?',
+            style: greyTextStyle,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/signup');
+            },
+            child: Text(
+              'Sign Up',
+              style: greenTextStyle.copyWith(
+                fontWeight: bold,
               ),
             ),
-          ],
+          ),
+        ],
+      );
+    }
+
+    // Input (email, Password)
+    Widget input() {
+      return Container(
+        margin: EdgeInsets.symmetric(horizontal: 40),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 50,
+              ),
+              emailInput(),
+              SizedBox(
+                height: 20,
+              ),
+              passwordInput(),
+              SizedBox(
+                height: 50,
+              ),
+              buttonSign(),
+              SizedBox(
+                height: 50,
+              ),
+              navToSignUp(),
+            ],
+          ),
         ),
       );
     }
@@ -368,8 +362,6 @@ class _SignInPageState extends State<SignInPage> {
           ),
           header(),
           input(),
-          buttonSign(),
-          navToSignUp(),
         ],
       ),
     );
