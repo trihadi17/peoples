@@ -14,12 +14,12 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    // // Timer
-    // Timer(
-    //   Duration(seconds: 5),
-    //   () => Navigator.pushNamedAndRemoveUntil(
-    //       context, '/signin', (route) => false),
-    // );
+    // Timer
+    Timer(
+      Duration(seconds: 5),
+      () => Navigator.pushNamedAndRemoveUntil(
+          context, '/signin', (route) => false),
+    );
     super.initState();
   }
 
@@ -51,7 +51,7 @@ class _SplashPageState extends State<SplashPage> {
                 height: 10,
               ),
               Text(
-                "Friend's",
+                "People's",
                 style: blackTextStyle.copyWith(
                   fontSize: 36,
                   fontWeight: bold,

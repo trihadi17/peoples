@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 Color blackColor = Color(0xff2F2D2C);
 Color whiteColor = Color(0xffffffff);
 Color greyColor = Color(0xff9B9B9B);
+Color whiteGreyColor = Color(0xffF1F1F5);
 Color greenColor = Color(0xff66cc66);
 
 // TextStyle
@@ -20,6 +21,10 @@ TextStyle whiteTextStyle = GoogleFonts.nunito(
 
 TextStyle greyTextStyle = GoogleFonts.nunito(
   color: greyColor,
+);
+
+TextStyle greenTextStyle = GoogleFonts.nunito(
+  color: greenColor,
 );
 
 // FontWeight
