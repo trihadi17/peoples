@@ -9,6 +9,12 @@ import 'package:google_fonts/google_fonts.dart';
 // Validator
 import '../validators.dart';
 
+// Provider
+import 'package:provider/provider.dart';
+
+// Class Provider
+import 'package:peoples/providers/people_provider.dart';
+
 class AddPage extends StatefulWidget {
   @override
   State<AddPage> createState() => _AddPageState();
@@ -26,6 +32,9 @@ class _AddPageState extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Provider
+    PeopleProvider peopleProvider = Provider.of<PeopleProvider>(context);
+
     // Email
     Widget emailInput() {
       return Column(
@@ -260,10 +269,15 @@ class _AddPageState extends State<AddPage> {
                   Future.delayed(
                     Duration(seconds: 2),
                     () {
+                      // Add Provider
+                      peopleProvider.addPeople(_emailController.text,
+                          _fullNameController.text, _jobController.text);
+
                       // nonaktifkan widget loading
                       setState(() {
                         isLoading = false;
                       });
+
                       Navigator.pop(context);
                     },
                   );

@@ -9,6 +9,12 @@ import 'package:peoples/pages/detail_page.dart';
 import 'package:peoples/pages/add_page.dart';
 import 'package:peoples/pages/update_page.dart';
 
+// Provider
+import 'package:provider/provider.dart';
+
+// Class Provider
+import 'package:peoples/providers/people_provider.dart';
+
 void main() {
   runApp(const PeoplesApp());
 }
@@ -18,17 +24,24 @@ class PeoplesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/': (context) => SplashPage(),
-        '/signin': (context) => SignInPage(),
-        '/signup': (context) => SignUpPage(),
-        '/main': (context) => Mainpage(),
-        '/detail': (context) => DetailPage(),
-        '/add': (context) => AddPage(),
-        '/update': (context) => UpdatePage(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => PeopleProvider(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/': (context) => SplashPage(),
+          '/signin': (context) => SignInPage(),
+          '/signup': (context) => SignUpPage(),
+          '/main': (context) => Mainpage(),
+          '/detail': (context) => DetailPage(),
+          '/add': (context) => AddPage(),
+          '/update': (context) => UpdatePage(),
+        },
+      ),
     );
   }
 }

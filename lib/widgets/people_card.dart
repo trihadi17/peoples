@@ -5,15 +5,21 @@ import '../theme.dart';
 
 // Package
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math';
+
+// Model
+import 'package:peoples/model/people.dart';
 
 class PeopleCard extends StatelessWidget {
-  final String imageUrl;
-  final String name;
+  // final String imageUrl;
+  // final String name;
 
-  PeopleCard({
-    required this.imageUrl,
-    required this.name,
-  });
+  final PeopleModel people;
+
+  PeopleCard(this.people);
+
+  // variable
+  int randomNumber = Random().nextInt(12) + 1;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +47,7 @@ class PeopleCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.network(
-                  '${imageUrl}',
+                  'https://reqres.in/img/faces/${randomNumber}-image.jpg',
                   width: double.infinity,
                   height: 132,
                   fit: BoxFit.cover,
@@ -50,7 +56,7 @@ class PeopleCard extends StatelessWidget {
             ),
             Center(
               child: Text(
-                '${name}',
+                '${people.fullname}',
                 style: blackTextStyle.copyWith(
                   fontSize: 18,
                   overflow: TextOverflow.ellipsis,

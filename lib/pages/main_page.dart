@@ -7,6 +7,12 @@ import 'package:peoples/theme.dart';
 import 'package:peoples/widgets/people_card.dart';
 import 'package:peoples/widgets/skeleton_people.dart';
 
+// Provider
+import 'package:provider/provider.dart';
+
+// Class Provider
+import 'package:peoples/providers/people_provider.dart';
+
 class Mainpage extends StatefulWidget {
   const Mainpage({Key? key}) : super(key: key);
 
@@ -25,6 +31,10 @@ class _MainpageState extends State<Mainpage> {
     });
 
     Future.delayed(Duration(seconds: 5), () {
+      // Get Data
+      Provider.of<PeopleProvider>(context, listen: false).getPeople();
+
+      // false
       setState(() {
         isLoading = false;
       });
@@ -34,6 +44,9 @@ class _MainpageState extends State<Mainpage> {
 
   @override
   Widget build(BuildContext context) {
+    // Provider
+    PeopleProvider peopleProvider = Provider.of<PeopleProvider>(context);
+
     // Header
     Widget header() {
       return Container(
@@ -138,12 +151,13 @@ class _MainpageState extends State<Mainpage> {
         child: Wrap(
           spacing: 15,
           runSpacing: 15,
-          children: [
-            PeopleCard(
-              imageUrl: 'https://reqres.in/img/faces/9-image.jpg',
-              name: 'Trihadi Putra',
-            ),
-          ],
+          children: peopleProvider.peoples
+              .map(
+                (value) => PeopleCard(
+                  value,
+                ),
+              )
+              .toList(),
         ),
       );
     }
