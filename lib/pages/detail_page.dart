@@ -6,8 +6,13 @@ import 'package:peoples/theme.dart';
 // Package
 import 'package:google_fonts/google_fonts.dart';
 
+// Model
+import '../model/people.dart';
+
 class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  final PeopleModel people;
+
+  DetailPage(this.people);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +39,7 @@ class DetailPage extends StatelessWidget {
 
             //* Name
             Text(
-              'Trihadi Putra',
+              '${people.fullname}',
               style: blackTextStyle.copyWith(
                 fontSize: 20,
                 fontWeight: semiBold,
@@ -47,7 +52,7 @@ class DetailPage extends StatelessWidget {
 
             //* Email
             Text(
-              'trihadi17@gmail.com',
+              '${people.email}',
               style: greyTextStyle.copyWith(
                 fontSize: 12,
               ),
@@ -84,7 +89,7 @@ class DetailPage extends StatelessWidget {
     Widget editButton() {
       return GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, '/update');
+          // Navigator.pushNamed(context, '/update');
         },
         child: Container(
           width: 80,

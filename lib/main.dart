@@ -37,9 +37,7 @@ class PeoplesApp extends StatelessWidget {
           '/signin': (context) => SignInPage(),
           '/signup': (context) => SignUpPage(),
           '/main': (context) => Mainpage(),
-          '/detail': (context) => DetailPage(),
           '/add': (context) => AddPage(),
-          '/update': (context) => UpdatePage(),
         },
       ),
     );

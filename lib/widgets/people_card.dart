@@ -7,6 +7,9 @@ import '../theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:math';
 
+// Page
+import 'package:peoples/pages/detail_page.dart';
+
 // Model
 import 'package:peoples/model/people.dart';
 
@@ -25,7 +28,12 @@ class PeopleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/detail');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: ((context) => DetailPage(people)),
+          ),
+        );
       },
       child: Container(
         width: (MediaQuery.of(context).size.width - 75) / 2,

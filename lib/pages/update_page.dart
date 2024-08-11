@@ -9,6 +9,9 @@ import 'package:google_fonts/google_fonts.dart';
 // Validator
 import '../validators.dart';
 
+// Model
+import '../model/people.dart';
+
 class UpdatePage extends StatefulWidget {
   const UpdatePage({Key? key}) : super(key: key);
 
@@ -25,6 +28,12 @@ class _UpdatePageState extends State<UpdatePage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _jobController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
