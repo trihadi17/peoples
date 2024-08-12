@@ -89,7 +89,7 @@ class DetailPage extends StatelessWidget {
     Widget editButton() {
       return GestureDetector(
         onTap: () {
-          // Navigator.pushNamed(context, '/update');
+          Navigator.pushNamed(context, '/update');
         },
         child: Container(
           width: 80,
