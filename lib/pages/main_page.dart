@@ -153,9 +153,7 @@ class _MainpageState extends State<Mainpage> {
           runSpacing: 15,
           children: peopleProvider.peoples
               .map(
-                (value) => PeopleCard(
-                  value,
-                ),
+                (value) => PeopleCard(value),
               )
               .toList(),
         ),

@@ -92,4 +92,63 @@ class PeopleProvider with ChangeNotifier {
 
     notifyListeners();
   }
+
+  // Membuat Method yang return nya sebuah Map (PeopleModel)
+  // Jika ingin fleksibel/dynamic buat aja nama methodnya langsung, bisa pakai return/tidak
+  PeopleModel getPeopleById(String id) {
+    return _peoples.firstWhere((element) => element.id == id);
+  }
+
+  Future<void> updatePeople(PeopleModel people) async {
+    // URL
+    Uri url = Uri.parse('$baseUrl/peoples/${people.id}.json');
+
+    // body (json encode) -> MANUAL
+    // var body = json.encode({
+    //   'email': people.email,
+    //   'fullname': people.fullname,
+    //   'job': people.job,
+    // });
+
+    // request
+    var response = await http.patch(
+      url,
+      body: jsonEncode(people.toJson()),
+    );
+
+    if (response.statusCode == 200) {
+      // Get data by Id
+      PeopleModel peopleData =
+          _peoples.firstWhere((element) => element.id == people.id);
+
+      // Update data
+      peopleData.email = people.email;
+      peopleData.fullname = people.fullname;
+      peopleData.job = people.job;
+    } else {
+      throw Exception(
+          'Failed to update : Status Code (${response.statusCode})');
+    }
+
+    notifyListeners();
+  }
+
+  Future<void> deletePeople(String id) async {
+    // URL
+    Uri url = Uri.parse('$baseUrl/peoples/$id.json');
+
+    // request
+    var response = await http.delete(url);
+
+    // Check
+    if (response.statusCode == 200) {
+      // Delete Pada Data Lokal
+      _peoples.removeWhere((element) => element.id == id);
+      print('delete');
+    } else {
+      throw Exception('Failed to delete : Status Code ${response.statusCode}');
+    }
+
+    notifyListeners();
+  }
 }

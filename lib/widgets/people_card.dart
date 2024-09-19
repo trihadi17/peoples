@@ -31,7 +31,7 @@ class PeopleCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: ((context) => DetailPage(people)),
+            builder: ((context) => DetailPage(people.id)),
           ),
         );
       },

@@ -9,13 +9,28 @@ import 'package:google_fonts/google_fonts.dart';
 // Model
 import '../model/people.dart';
 
-class DetailPage extends StatelessWidget {
-  final PeopleModel people;
+// Pages
+import 'package:peoples/pages/update_page.dart';
 
-  DetailPage(this.people);
+// Provider
+import 'package:provider/provider.dart';
+
+// Class Provider
+import 'package:peoples/providers/people_provider.dart';
+
+class DetailPage extends StatelessWidget {
+  final String idPeople;
+
+  DetailPage(this.idPeople);
 
   @override
   Widget build(BuildContext context) {
+    // Provider
+    PeopleProvider peopleProvider = Provider.of<PeopleProvider>(context);
+
+    // Get data berdasarkan Id
+    PeopleModel peopleData = peopleProvider.getPeopleById(idPeople);
+
     // Header
     Widget header() {
       return Container(
@@ -39,7 +54,7 @@ class DetailPage extends StatelessWidget {
 
             //* Name
             Text(
-              '${people.fullname}',
+              '${peopleData.fullname}',
               style: blackTextStyle.copyWith(
                 fontSize: 20,
                 fontWeight: semiBold,
@@ -52,7 +67,7 @@ class DetailPage extends StatelessWidget {
 
             //* Email
             Text(
-              '${people.email}',
+              '${peopleData.email}',
               style: greyTextStyle.copyWith(
                 fontSize: 12,
               ),
@@ -89,7 +104,12 @@ class DetailPage extends StatelessWidget {
     Widget editButton() {
       return GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, '/update');
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => UpdatePage(peopleData),
+              ));
+          // Navigator.pushNamed(context, '/update');
         },
         child: Container(
           width: 80,
@@ -142,8 +162,13 @@ class DetailPage extends StatelessWidget {
                     TextButton(
                       onPressed: () {
                         print('delete');
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, '/main', (route) => false);
+                        // Aksi Delete
+                        peopleProvider.deletePeople(idPeople);
+
+                        // Ini untuk menghapus alert dialog
+                        Navigator.pop(context);
+                        // Ini kembali kepada homepage
+                        Navigator.pop(context);
                       },
                       child: Text(
                         'Delete',

@@ -12,8 +12,16 @@ import '../validators.dart';
 // Model
 import '../model/people.dart';
 
+// Provider
+import 'package:provider/provider.dart';
+
+// Class Provider
+import 'package:peoples/providers/people_provider.dart';
+
 class UpdatePage extends StatefulWidget {
-  const UpdatePage({Key? key}) : super(key: key);
+  final PeopleModel people;
+
+  UpdatePage(this.people);
 
   @override
   State<UpdatePage> createState() => _UpdatePageState();
@@ -31,12 +39,28 @@ class _UpdatePageState extends State<UpdatePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    // Inisialiasasi data dari parameter
+    _emailController.text = widget.people.email;
+    _fullNameController.text = widget.people.fullname;
+    _jobController.text = widget.people.job;
     super.initState();
+  }
+
+  // Penting Di inisialisasi ketika menggunakan textEditingConteroller
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _fullNameController.dispose();
+    _jobController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    // Provider
+    PeopleProvider peopleProvider =
+        Provider.of<PeopleProvider>(context, listen: false);
+
     // Email
     Widget emailInput() {
       return Column(
@@ -271,6 +295,13 @@ class _UpdatePageState extends State<UpdatePage> {
                   Future.delayed(
                     Duration(seconds: 2),
                     () {
+                      peopleProvider.updatePeople(PeopleModel(
+                        id: widget.people.id,
+                        email: _emailController.text,
+                        fullname: _fullNameController.text,
+                        job: _jobController.text,
+                      ));
+
                       // nonaktifkan widget loading
                       setState(() {
                         isLoading = false;

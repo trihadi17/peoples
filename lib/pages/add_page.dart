@@ -30,6 +30,15 @@ class _AddPageState extends State<AddPage> {
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _jobController = TextEditingController();
 
+  // Penting Di inisialisasi ketika menggunakan textEditingConteroller
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _fullNameController.dispose();
+    _jobController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     // Provider

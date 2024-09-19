@@ -14,4 +14,10 @@ class PeopleModel {
     email = json['email'];
     fullname = json['fullname'];
   }
+
+  Map<String, dynamic> toJson() => {
+        'email': email,
+        'fullname': fullname,
+        'job': job,
+      };
 }
